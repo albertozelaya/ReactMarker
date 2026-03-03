@@ -1,21 +1,23 @@
 interface CheckBoxParams {
   label: string;
+  name: string;
+  checked: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function MarkerCheckBox({ label }: CheckBoxParams) {
+function MarkerCheckBox({ label, name, checked, onChange }: CheckBoxParams) {
   return (
     <li className="flex items-center justify-between gap-6">
-      <label
-        htmlFor="incoming"
-        className="font-medium tracking-wide text-gray-800"
-      >
+      <label htmlFor={name} className="font-medium tracking-wide text-gray-800">
         - {label}
       </label>
 
       <input
         type="checkbox"
-        name="incoming"
-        id="incoming"
+        name={name}
+        id={name}
+        checked={checked}
+        onChange={onChange}
         className="h-4 w-4 cursor-pointer"
       />
     </li>
