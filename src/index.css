@@ -1,4 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
 @import "tailwindcss";
+
+@theme {
+  /* --breakpoint-*: initial; */
+  --breakpoint-xl: 110rem;
+  --color-button: #b01212; /* dc2626 MAIN */
+  --color-button-hover: #880000;
+  --color-accent: #2ace6c; /* 00c950 */
+  --color-accent-text: #005221;
+}
 
 * {
   /* padding: 0; */
@@ -12,7 +23,7 @@ html {
 }
 
 body {
-  font-family: "Rubik", sans-serif;
+  font-family: "Inter", sans-serif;
   /* background-color: #dc2626; */
   /* line-height: 1; */
   /* font-weight: 400; */
