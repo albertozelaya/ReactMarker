@@ -1,25 +1,24 @@
-export default function SingleHistory() {
-  return (
-    <article className="flex flex-col gap-4 rounded-md border border-gray-100 bg-gray-100 p-4 shadow-md">
-      <figure>
-        <div className="bg-accent text-accent-text w-full rounded-sm p-1 ps-2 text-sm font-bold tracking-wider uppercase">
-          <p>Entrada</p>
-        </div>
-        <div className="mt-3">
-          <p>Fecha: 02/03/2026</p>
-          <p>Hora: 8:20pm</p>
-        </div>
-      </figure>
+interface SingleHistoryParams {
+  date: string;
+  checkInTime: string;
+  checkOutTime: string;
+}
 
-      <figure>
-        <div className="bg-accent text-accent-text w-full rounded-sm p-1 ps-2 text-sm font-bold tracking-wider uppercase">
-          <p>Entrada</p>
-        </div>
-        <div className="mt-3">
-          <p>Fecha: 02/03/2026</p>
-          <p>Hora: 8:20pm</p>
-        </div>
-      </figure>
-    </article>
+export default function SingleHistory({
+  date,
+  checkInTime,
+  checkOutTime,
+}: SingleHistoryParams) {
+  return (
+    <figure className="flex flex-col gap-4 rounded-md border border-gray-100 bg-gray-100 p-4 shadow-md xl:p-5">
+      <div className="bg-accent text-accent-text w-full rounded-sm p-1 ps-2 text-sm font-bold tracking-wider uppercase lg:text-sm xl:tracking-wide">
+        <p>{date}</p>
+      </div>
+
+      <div className="">
+        <p>Hora de Entrada: {checkInTime}</p>
+        <p>Hora de Salida: {checkOutTime}</p>
+      </div>
+    </figure>
   );
 }

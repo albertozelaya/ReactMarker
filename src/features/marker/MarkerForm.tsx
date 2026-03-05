@@ -5,8 +5,8 @@ import MarkerCheckBox from "./MarkerCheckBox";
 
 function MarkerForm() {
   const [checks, setChecks] = useState({
-    incoming: false,
-    outgoing: false,
+    checkIn: false,
+    checkOut: false,
     lunchStart: false,
     lunchEnd: false,
   });
@@ -17,25 +17,27 @@ function MarkerForm() {
 
   const handleSubmit = function (e: React.BaseSyntheticEvent) {
     e.preventDefault();
+
+    console.log(checks);
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex w-full flex-col gap-6 rounded-lg bg-gray-50 px-8 pt-8 pb-6 shadow-lg xl:grid xl:w-1/3 xl:grid-cols-2 xl:py-12"
+      className="flex w-full flex-col gap-6 rounded-lg bg-gray-50 px-8 pt-8 pb-6 shadow-lg lg:flex-row lg:justify-between lg:px-10 lg:py-10 xl:grid xl:w-1/3 xl:grid-cols-1 xl:gap-8 xl:pt-12 xl:pb-8"
     >
       <div className="flex xl:items-center">
         <ul className="w-full space-y-2.5 xl:space-y-3">
           <MarkerCheckBox
             label="Entrada"
-            name="incoming"
-            checked={checks.incoming}
+            name="checkIn"
+            checked={checks.checkIn}
             onChange={handleChange}
           />
           <MarkerCheckBox
             label="Salida"
-            name="outgoing"
-            checked={checks.outgoing}
+            name="checkOut"
+            checked={checks.checkOut}
             onChange={handleChange}
           />
           <MarkerCheckBox

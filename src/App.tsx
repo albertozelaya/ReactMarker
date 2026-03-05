@@ -1,19 +1,16 @@
 import MarkHistory from "./features/history/MarkHistory";
 import MarkerForm from "./features/marker/MarkerForm";
+import Title from "./features/ui/Title";
 
 import "./index.css";
 
 function App() {
   return (
-    <div className="h-screen w-screen bg-gray-100 py-12 xl:px-16 xl:py-20">
+    <div className="h-screen w-screen bg-gray-100 py-12 sm:px-[10%] sm:py-10 md:px-[15%] xl:px-14 xl:py-12">
       <div className="mx-auto my-0 h-full w-10/12">
-        <header>
-          <h1 className="text-center text-3xl font-semibold tracking-wider text-gray-800 uppercase">
-            Marcador
-          </h1>
-        </header>
+        <Title />
 
-        <div className="mt-14 flex flex-col gap-10 xl:mt-20">
+        <div className="xl:align-start mt-14 flex flex-col gap-10 sm:mt-10 sm:gap-8 xl:mt-16 xl:flex-row xl:items-start xl:gap-10 2xl:gap-12">
           <MarkerForm />
           <MarkHistory />
         </div>
