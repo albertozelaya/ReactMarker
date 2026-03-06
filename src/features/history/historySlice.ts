@@ -16,7 +16,7 @@ export const singleHistoryData = [
     checkOutTime: "16.36.38",
   },
   {
-    id: 2,
+    id: 3,
     code: "12720",
     fullName: "EVELYN PATRICIA MELGARES OSORTO",
     date: "2026-01-08",
@@ -24,11 +24,30 @@ export const singleHistoryData = [
     checkOutTime: "16.36.38",
   },
   {
-    id: 2,
+    id: 4,
     code: "12720",
     fullName: "EVELYN PATRICIA MELGARES OSORTO",
     date: "2026-01-08",
     checkInTime: "08.26.44",
     checkOutTime: "16.36.38",
+  },
+];
+
+export const checksData = [
+  {
+    type: "EN",
+    description: "Entrada",
+  },
+  {
+    type: "SA",
+    description: "Salida",
+  },
+  {
+    type: "IAL",
+    description: "Inicio almuerzo",
+  },
+  {
+    type: "FAL",
+    description: "Final almuerzo",
   },
 ];

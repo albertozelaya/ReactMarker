@@ -7,10 +7,10 @@ interface CheckBoxParams {
 
 function MarkerCheckBox({ label, name, checked, onChange }: CheckBoxParams) {
   return (
-    <li className="flex items-center justify-between lg:gap-6">
+    <li className="flex items-center justify-between lg:gap-6 2xl:gap-10">
       <label
         htmlFor={name}
-        className="font-medium tracking-wider text-gray-800 xl:tracking-wide"
+        className="font-medium tracking-wider text-gray-800 xl:tracking-wide 2xl:text-lg 2xl:tracking-normal"
       >
         {label}
       </label>
