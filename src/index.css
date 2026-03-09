@@ -9,7 +9,8 @@
   --breakpoint-md: 41rem;
   --breakpoint-lg: 50rem;
   --breakpoint-xl: 67rem;
-  --breakpoint-2xl: 90rem;
+  --breakpoint-2xl: 95rem;
+  --breakpoint-3xl: 100rem;
   --color-button: #b01212; /* #dc2626 MAIN */
   --color-button-hover: #880000;
   --color-accent: #2ace6c; /* 00c950 */
@@ -17,15 +18,8 @@
 }
 
 * {
-  /* padding: 0; */
-  /* margin: 0; */
   box-sizing: border-box;
 }
-
-/* html {
-  font-size: 62.5%;
-  overflow-x: hidden;
-} */
 
 html {
   overflow-x: hidden;
