@@ -1,22 +1,27 @@
 import { useState } from "react";
 
 import Button from "../../components/Button";
-import { useMarkContext } from "../../hooks/useMarkContext";
+import { useMarkContext } from "../../contexts/useMarkContext";
 import type { MarkersIntl } from "../../interfaces/markersInt";
-import { ErrorForm } from "../ui/Errors";
+import { insertMark } from "../../services/apiMarkers";
+import { ErrorForm } from "../../ui/Errors";
+import { SpinnerButton } from "../../ui/Spinners";
 import MarkerCheckBox from "./MarkerCheckBox";
 
 function MarkerForm() {
+  const { addResponse } = useMarkContext();
   const { markers } = useMarkContext();
   const markersData = markers as MarkersIntl;
-  const [checks, setChecks] = useState(() =>
-    Object.fromEntries(markersData?.data?.map((c) => [c.type, false])),
+  const initialState = Object.fromEntries(
+    markersData?.data?.map((c) => [c.type, false]),
   );
+  const [checks, setChecks] = useState(() => initialState);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = function (e: React.ChangeEvent<HTMLInputElement>) {
     const updatedChecks = {
-      ...checks,
+      ...initialState,
       [e.target.name]: e.target.checked,
     };
 
@@ -25,7 +30,7 @@ function MarkerForm() {
     if (Object.values(updatedChecks).some(Boolean)) setErrorMessage("");
   };
 
-  const handleSubmit = function (e: React.BaseSyntheticEvent) {
+  const handleSubmit = async function (e: React.BaseSyntheticEvent) {
     e.preventDefault();
     const sendValue = Object.fromEntries(
       Object.entries(checks).filter(([, value]) => value),
@@ -37,7 +42,17 @@ function MarkerForm() {
     const value = Object.keys(sendValue)[0];
     const sendFormatted = { type: value };
 
-    console.log(sendFormatted);
+    setIsLoading(true);
+    await insertMark(sendFormatted)
+      .then((res) => {
+        if (res?.errors?.length > 0)
+          addResponse(res?.errors?.join(", "), "error");
+        else {
+          addResponse(res?.data?.response, "success");
+          setChecks(initialState);
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -48,7 +63,7 @@ function MarkerForm() {
       <div>
         <div className="flex xl:items-center">
           <ul className="3xl:space-y-5 w-full space-y-2.5 xl:space-y-3 2xl:space-y-4">
-            {markers?.data?.map((check) => (
+            {markersData?.data?.map((check) => (
               <MarkerCheckBox
                 key={check.type}
                 label={check.description}
@@ -63,7 +78,7 @@ function MarkerForm() {
         {errorMessage && <ErrorForm error={errorMessage} />}
       </div>
 
-      <Button title="marcar" />
+      <Button>{isLoading ? <SpinnerButton /> : "marcar"}</Button>
     </form>
   );
 }

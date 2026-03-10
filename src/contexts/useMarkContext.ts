@@ -1,12 +1,15 @@
 import { createContext, useContext } from "react";
 import type { HistoryIntl } from "../interfaces/historyInt";
 import type { MarkersIntl } from "../interfaces/markersInt";
+import type { Response } from "../hooks/useApiResponse";
 
 interface MarkContextParams {
   history?: HistoryIntl;
   markers?: MarkersIntl;
-  errors: string[];
-  clearError: (message: string) => void;
+  isLoading: boolean;
+  responses: Response[];
+  clearResponse: (message: string) => void;
+  addResponse: (message: string, type: "success" | "error") => void;
 }
 
 export const MarksContext = createContext<MarkContextParams | undefined>(

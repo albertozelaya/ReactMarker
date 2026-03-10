@@ -1,4 +1,4 @@
-import { useMarkContext } from "../../hooks/useMarkContext";
+import { useMarkContext } from "../../contexts/useMarkContext";
 import SingleHistory from "./SingleHistory";
 
 function MarkHistory() {
@@ -8,7 +8,7 @@ function MarkHistory() {
     <aside className="2xl:max-w-auto 3xl:py-14 w-full overflow-hidden rounded-lg bg-gray-50 p-8 pt-8 pb-6 shadow-lg sm:pt-6 lg:py-10 xl:grid xl:w-2/3 xl:grid-cols-1 xl:pt-9 2xl:py-12">
       <div>
         <h2 className="3xl:text-3xl text-center text-[1.4rem] leading-8 font-semibold tracking-tight text-gray-800 uppercase lg:text-gray-700 xl:text-2xl 2xl:text-[1.6rem]">
-          Historial de marcados
+          Historial
         </h2>
       </div>
 

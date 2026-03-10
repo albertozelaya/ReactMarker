@@ -1,10 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
 @import "tailwindcss";
+@import "../src/css/spinner.css";
+
+:root {
+  /* PRIMARY */
+  --main-color: #dc2626;
+  /* TINTS */
+  --container-background: #f9fafb;
+  /* SHADES */
+  --color-button: #b01212;
+  --color-button-hover: #880000;
+  --color-dark-background: #4a5565;
+  /* ACCENTS */
+}
 
 @theme {
   /* --breakpoint-*: initial; */
-  --breakpoint-xl: 110rem;
   --breakpoint-sm: 35rem;
   --breakpoint-md: 41rem;
   --breakpoint-lg: 50rem;

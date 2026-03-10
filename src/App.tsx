@@ -1,27 +1,35 @@
+import { useMarkContext } from "./contexts/useMarkContext";
 import MarkHistory from "./features/history/MarkHistory";
 import MarkerForm from "./features/marker/MarkerForm";
-import { ErrorNotification } from "./features/ui/Errors";
-import Title from "./features/ui/Title";
-import { useMarkContext } from "./hooks/useMarkContext";
+import { AddNotification, NotificationContainer } from "./ui/Notification";
+import Spinner from "./ui/Spinners";
+import Title from "./ui/Title";
 
 import "./index.css";
 
 function App() {
-  const { errors, clearError } = useMarkContext();
-  const { markers } = useMarkContext();
+  const { markers, isLoading, responses, clearResponse } = useMarkContext();
+
+  if (isLoading)
+    return (
+      <div className="parent-spinner bg-gray-100">
+        <Spinner />
+      </div>
+    );
 
   return (
     <>
-      {errors.length > 0 && (
-        <div className="fixed top-4 right-4 flex flex-col gap-2">
-          {errors.map((error) => (
-            <ErrorNotification
-              key={error}
-              message={error}
-              onClose={clearError}
+      {responses.length > 0 && (
+        <NotificationContainer>
+          {responses.map((response) => (
+            <AddNotification
+              key={response.message}
+              message={response.message}
+              onClose={clearResponse}
+              variant={response.type}
             />
           ))}
-        </div>
+        </NotificationContainer>
       )}
 
       <div className="h-screen w-screen bg-gray-100 py-10 sm:px-[10%] sm:py-10 md:px-[15%] xl:px-14 xl:py-12 2xl:py-15">
