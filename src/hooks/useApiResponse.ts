@@ -18,10 +18,13 @@ export function useApiError() {
     [],
   );
 
-  const clearResponse = (message: string) =>
-    setResponses((prev) =>
-      prev.filter((response) => response.message !== message),
-    );
+  const clearResponse = useCallback(
+    (message: string) =>
+      setResponses((prev) =>
+        prev.filter((response) => response.message !== message),
+      ),
+    [],
+  );
 
   return { responses, addResponse, clearResponse };
 }

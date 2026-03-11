@@ -17,6 +17,7 @@
 
 @theme {
   /* --breakpoint-*: initial; */
+  --color-main: #dc2626;
   --breakpoint-sm: 35rem;
   --breakpoint-md: 41rem;
   --breakpoint-lg: 50rem;
@@ -25,8 +26,8 @@
   --breakpoint-3xl: 100rem;
   --color-button: #b01212; /* #dc2626 MAIN */
   --color-button-hover: #880000;
-  --color-accent: #2ace6c; /* 00c950 */
-  --color-accent-text: #005221;
+  --color-accent: #00c9f1; /* 00c950 */
+  --color-accent-text: #00505f;
 }
 
 * {
