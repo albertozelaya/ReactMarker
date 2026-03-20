@@ -9,7 +9,7 @@ import { SpinnerButton } from "../../ui/Spinners";
 import MarkerCheckBox from "./MarkerCheckBox";
 
 function MarkerForm() {
-  const { addResponse } = useMarkContext();
+  const { addResponse, getHistory } = useMarkContext();
   const { markers } = useMarkContext();
   const markersData = markers as MarkersIntl;
   const initialState = Object.fromEntries(
@@ -52,7 +52,10 @@ function MarkerForm() {
           setChecks(initialState);
         }
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+        getHistory()
+      });
   };
 
   return (

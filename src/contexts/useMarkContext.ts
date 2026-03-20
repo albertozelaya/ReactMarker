@@ -8,6 +8,8 @@ interface MarkContextParams {
   markers?: MarkersIntl;
   isLoading: boolean;
   responses: Response[];
+  getHistory: () => void;
+  getMarkers: () => void;
   clearResponse: (message: string) => void;
   addResponse: (message: string, type: "success" | "error") => void;
 }

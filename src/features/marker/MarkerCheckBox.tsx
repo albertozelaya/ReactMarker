@@ -21,7 +21,7 @@ function MarkerCheckBox({ label, name, checked, onChange }: CheckBoxParams) {
         id={name}
         checked={checked}
         onChange={onChange}
-        className="focus:ring-main h-4 w-4 cursor-pointer focus:ring focus:outline-none"
+        className="focus:ring-accent accent-accent h-4 w-4 cursor-pointer focus:ring focus:outline-none"
       />
     </li>
   );

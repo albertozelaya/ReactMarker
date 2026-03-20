@@ -14,21 +14,28 @@ export function useApiMarkers() {
 
   const isLoading = isLoadingHistory || isLoadingMarkers;
 
-  useEffect(() => {
-    //*HISTORY
+  const getHistory = function () {
     getRequests(`${import.meta.env.VITE_BASE_API_URL}/marcador`)
       .then(setHistory)
       .catch(() => addResponse("No se pudo cargar el historial.", "error"))
       .finally(() => setIsLoadingHistory(false));
+  };
 
-    //* MARKERS
+  const getMarkers = function () {
     getRequests(`${import.meta.env.VITE_BASE_API_URL}/marcador/types`)
       .then(setMarkers)
       .catch(() =>
         addResponse("No se pudieron cargar los marcadores.", "error"),
       )
       .finally(() => setIsLoadingMarkers(false));
-  }, [addResponse]);
+  };
+
+  useEffect(() => {
+    getHistory();
+    getMarkers();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     history,
@@ -36,6 +43,8 @@ export function useApiMarkers() {
     responses,
     addResponse,
     clearResponse,
+    getHistory,
+    getMarkers,
     isLoading,
   };
 }
