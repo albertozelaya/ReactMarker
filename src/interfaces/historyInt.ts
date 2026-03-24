@@ -1,17 +1,15 @@
 export interface HistoryIntl {
-  errors: any[];
-  validationErrors: ValidationErrors;
+  errors: string[];
+  validationErrors: object;
   data: Datum[];
-  metadata: ValidationErrors;
+  metadata: object;
 }
 
-interface Datum {
+export interface Datum {
   id: number;
   code: string;
   fullName: string;
   date: string;
-  checkInTime: string;
-  checkOutTime: string;
+  startDate: string;
+  endDate: string;
 }
-
-interface ValidationErrors {}

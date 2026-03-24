@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 
 import type { HistoryIntl } from "../interfaces/historyInt";
-import type { MarkersIntl } from "../interfaces/markersInt";
 import { getRequests } from "../services/apiMarkers";
 import { useApiError } from "./useApiResponse";
 
 export function useApiMarkers() {
   const [history, setHistory] = useState<HistoryIntl>();
-  const [markers, setMarkers] = useState<MarkersIntl>();
+  // const [markers, setMarkers] = useState<MarkersIntl>();
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
-  const [isLoadingMarkers, setIsLoadingMarkers] = useState(true);
+  // const [isLoadingMarkers, setIsLoadingMarkers] = useState(true);
   const { responses, addResponse, clearResponse } = useApiError();
 
-  const isLoading = isLoadingHistory || isLoadingMarkers;
+  // const isLoading = isLoadingHistory || isLoadingMarkers;
+  const isLoading = isLoadingHistory;
 
   const getHistory = function () {
     getRequests(`${import.meta.env.VITE_BASE_API_URL}/marcador`)
@@ -21,30 +21,30 @@ export function useApiMarkers() {
       .finally(() => setIsLoadingHistory(false));
   };
 
-  const getMarkers = function () {
-    getRequests(`${import.meta.env.VITE_BASE_API_URL}/marcador/types`)
-      .then(setMarkers)
-      .catch(() =>
-        addResponse("No se pudieron cargar los marcadores.", "error"),
-      )
-      .finally(() => setIsLoadingMarkers(false));
-  };
+  // const getMarkers = function () {
+  //   getRequests(`${import.meta.env.VITE_BASE_API_URL}/marcador/types`)
+  //     .then(setMarkers)
+  //     .catch(() =>
+  //       addResponse("No se pudieron cargar los marcadores.", "error"),
+  //     )
+  //     .finally(() => setIsLoadingMarkers(false));
+  // };
 
   useEffect(() => {
     getHistory();
-    getMarkers();
+    // getMarkers();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
     history,
-    markers,
+    // markers,
     responses,
     addResponse,
     clearResponse,
     getHistory,
-    getMarkers,
+    // getMarkers,
     isLoading,
   };
 }

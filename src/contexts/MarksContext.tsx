@@ -8,22 +8,22 @@ interface MarkContextParams {
 function MarkContext({ children }: MarkContextParams) {
   const {
     history,
-    markers,
+    // markers,
     responses,
     clearResponse,
     isLoading,
     addResponse,
     getHistory,
-    getMarkers,
+    // getMarkers,
   } = useApiMarkers();
 
   return (
     <MarksContext.Provider
       value={{
         getHistory,
-        getMarkers,
+        // getMarkers,
         history,
-        markers,
+        // markers,
         responses,
         clearResponse,
         isLoading,
