@@ -1,14 +1,15 @@
+import { type ReactNode } from "react";
+
 import Scheduler, { type SchedulerTypes } from "devextreme-react/scheduler";
 import type { FirstDayOfWeek } from "devextreme/common";
 import "devextreme/dist/css/dx.light.css";
-import React from "react";
 
 // 1. Extraemos el tipo base de una cita de DevExtreme para asegurar compatibilidad
 type AppointmentBase = SchedulerTypes.Appointment;
 type EditingConfig = SchedulerTypes.Properties["editing"];
 
 interface CalendarParams<T extends AppointmentBase> {
-  children?: React.ReactNode;
+  children?: ReactNode;
   dataSource?: T[];
   defaultCurrentView?: string;
   defaultCurrentDate?: Date;

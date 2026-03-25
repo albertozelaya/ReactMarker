@@ -28,14 +28,23 @@ function MarkHistory() {
   const appointments = transformHistory(historyData?.data ?? []);
 
   return (
-    <Calendar
-      dataSource={appointments}
-      defaultCurrentDate={new Date()}
-      className="z-20 h-60 sm:h-72 lg:h-[80vh]"
-      views={views}
-      editing={editing}
-      adaptivityEnabled={!middleWidth}
-    />
+    <article className="3xl:gap-16 flex flex-col gap-10 xl:gap-14">
+      <div>
+        <h2 className="3xl:text-5xl text-center text-3xl leading-8 font-semibold tracking-tight text-gray-800 lg:text-4xl lg:text-gray-700 xl:text-4xl xl:tracking-normal 2xl:text-[2.75rem]">
+          Historial
+        </h2>
+      </div>
+
+      <Calendar
+        className="3xl:h-[74vh] h-120 sm:h-128 lg:h-[75vh] xl:h-[72vh]"
+        dataSource={appointments}
+        defaultCurrentView="timelineDay"
+        defaultCurrentDate={appointments.at(-1)?.startDate}
+        views={views}
+        editing={editing}
+        adaptivityEnabled={!middleWidth}
+      />
+    </article>
   );
 }
 

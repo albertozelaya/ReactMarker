@@ -2,7 +2,7 @@ import "../css/backgroundLayout.css";
 
 export default function BackgroundLayout() {
   return (
-    <div className="h-ull pointer-events-none absolute inset-0 z-10 w-full overflow-hidden">
+    <div className="h-ull pointer-events-none absolute inset-0 w-full overflow-hidden">
       <div className="bg-accent circle-float-1 absolute -top-15 -left-15 h-72 w-72 rounded-full opacity-20 blur-3xl" />
 
       <div className="circle-float-2 absolute -right-10 -bottom-10 h-96 w-96 rounded-full bg-cyan-300 opacity-15 blur-3xl" />
