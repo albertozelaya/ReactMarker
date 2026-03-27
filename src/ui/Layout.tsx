@@ -7,16 +7,14 @@ interface LayoutParams {
 export default function Layout({ children }: LayoutParams) {
   return (
     <div className="3xl:top-[50%] mx-auto my-0 h-full w-10/12">
-      <div className="3xl:gap-10 flex flex-col gap-10 sm:gap-18 lg:gap-16 xl:gap-24 2xl:gap-20">
+      <div className="3xl:gap-10 flex flex-col gap-10 sm:gap-18 lg:gap-12 xl:gap-6 2xl:gap-10">
         <Header />
 
         <div className="3xl:text-xl 3xl:px-52 3xl:leading-8 3xl:tracking-wider text-center leading-6 tracking-wide lg:text-lg lg:leading-7 xl:px-24 2xl:px-36">
           <p>
-            Gestione su jornada laboral registrando sus entradas y salidas de
-            forma segura.
+            Registre su entrada o salida de forma segura.
             <strong className="font-semibold text-gray-950">
-              &nbsp;Consulte su historial de marcaciones en el calendario
-              inferior.
+              &nbsp;Consulte su historial en el calendario inferior.
             </strong>
           </p>
         </div>

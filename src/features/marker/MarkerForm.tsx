@@ -13,6 +13,9 @@ interface MarkerParams {
 
 function MarkerForm({ children }: MarkerParams) {
   const { addResponse, getHistory } = useMarkContext();
+  const [isLoading, setIsLoading] = useState(false);
+  // const [markedTime, setMarkedTime] = useState<string | null>(null);
+
   // const { markers } = useMarkContext();
   // const markersData = markers as MarkersIntl;
 
@@ -21,9 +24,6 @@ function MarkerForm({ children }: MarkerParams) {
   // );
   // const [checks, setChecks] = useState(() => initialState);
   // const [errorMessage, setErrorMessage] = useState("");
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [markedTime, setMarkedTime] = useState<string | null>(null);
 
   const handleSubmit = async function (e: React.BaseSyntheticEvent) {
     e.preventDefault();
@@ -36,7 +36,7 @@ function MarkerForm({ children }: MarkerParams) {
           addResponse(res?.errors?.join(", "), "error");
         } else {
           addResponse(res?.data?.response, "success");
-          setMarkedTime(res?.data?.time ?? null);
+          // setMarkedTime(res?.data?.times ?? null);
           getHistory();
         }
       })
@@ -46,7 +46,7 @@ function MarkerForm({ children }: MarkerParams) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="3xl:py-8 z-20 flex flex-col items-center justify-center gap-6 px-12 py-10 lg:px-8 xl:w-120 xl:self-center xl:pt-28 xl:pb-14 2xl:py-14"
+      className="3xl:py-8 z-20 flex flex-col items-center justify-center gap-4 px-12 py-10 lg:px-8 xl:w-120 xl:gap-5 xl:self-center xl:py-4 xl:pb-14 2xl:gap-6 2xl:py-20"
     >
       {/* <div>
         <div className="flex xl:items-center">
@@ -68,11 +68,11 @@ function MarkerForm({ children }: MarkerParams) {
 
       <Button>{isLoading ? <SpinnerButton /> : "Marcar"}</Button>
 
-      {markedTime && (
+      {/* {markedTime && (
         <p className="text-sm text-gray-700 md:text-base 2xl:text-lg">
           {markedTime}
         </p>
-      )}
+      )} */}
 
       {children}
     </form>

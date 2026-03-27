@@ -7,6 +7,8 @@ export type HistoryItem = {
   date: string;
   startDate: Date;
   endDate: Date;
+  colorStart: string;
+  colorEnd: string;
 };
 
 /**

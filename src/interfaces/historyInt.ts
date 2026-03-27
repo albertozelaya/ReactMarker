@@ -12,4 +12,6 @@ export interface Datum {
   date: string;
   startDate: string;
   endDate: string;
+  colorStart: string;
+  colorEnd: string;
 }

@@ -8,6 +8,13 @@ import "devextreme/dist/css/dx.light.css";
 type AppointmentBase = SchedulerTypes.Appointment;
 type EditingConfig = SchedulerTypes.Properties["editing"];
 
+export interface AppointmentComponentProps<T> {
+  data: {
+    appointmentData: T;
+    targetedAppointmentData?: T;
+  };
+}
+
 interface CalendarParams<T extends AppointmentBase> {
   children?: ReactNode;
   dataSource?: T[];
@@ -21,6 +28,7 @@ interface CalendarParams<T extends AppointmentBase> {
   firstDayOfWeek?: FirstDayOfWeek;
   showAllDayPanel?: boolean;
   views: SchedulerTypes.ViewType[];
+  customComponent?: React.ComponentType<AppointmentComponentProps<T>>;
   className?: string;
   editing?: EditingConfig;
   adaptivityEnabled?: boolean;
@@ -32,6 +40,7 @@ function Calendar<T extends AppointmentBase>({
   dataSource,
   defaultCurrentView = "timelineMonth",
   defaultCurrentDate = new Date(),
+  customComponent,
   startDayHour = 7,
   endDayHour = 20,
   cellDuration = 60,
@@ -50,6 +59,7 @@ function Calendar<T extends AppointmentBase>({
       className={className}
       dataSource={dataSource}
       views={views}
+      appointmentComponent={customComponent}
       adaptivityEnabled={adaptivityEnabled}
       defaultCurrentView={defaultCurrentView}
       defaultCurrentDate={defaultCurrentDate}
@@ -61,11 +71,14 @@ function Calendar<T extends AppointmentBase>({
       firstDayOfWeek={firstDayOfWeek}
       showAllDayPanel={showAllDayPanel}
       onAppointmentRendered={(e) => {
-        const color = (e.appointmentData as T).color;
-        if (color && e.appointmentElement) {
-          e.appointmentElement.style.backgroundColor = color;
-          e.appointmentElement.style.borderColor = color;
-        }
+        // const color = (e.appointmentData as T).color;
+        // if (color && e.appointmentElement) {
+        //   e.appointmentElement.style.backgroundColor = color;
+        //   e.appointmentElement.style.borderColor = color;
+        // }
+        e.appointmentElement.style.backgroundColor = "transparent";
+        e.appointmentElement.style.borderColor = "transparent";
+        e.appointmentElement.style.boxShadow = "none";
       }}
       editing={editing}
     >

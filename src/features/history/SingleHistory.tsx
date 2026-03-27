@@ -1,23 +1,29 @@
-interface SingleHistoryParams {
-  date: string;
-  checkInTime: string;
-  checkOutTime: string;
-}
+import type { AppointmentComponentProps } from "../../components/Calendar";
+import { shortDate } from "../../utils/dateHelpers";
+import type { HistoryItem } from "./transformHistory";
 
-export default function SingleHistory({
-  date,
-  checkInTime,
-  checkOutTime,
-}: SingleHistoryParams) {
+// AppointmentCustom.tsx
+export default function SingleHistory(
+  model: AppointmentComponentProps<HistoryItem>,
+) {
+  const { appointmentData } = model.data;
+
   return (
-    <figure className="3xl:py-7 3xl:px-5 flex flex-col gap-4 rounded-md border border-gray-100 bg-gray-100 p-4 shadow-md xl:p-5 3xl:leading-7">
-      <div className="bg-accent text-accent-text 3xl:text-[1rem] 3xl:p-1.5 w-full rounded-sm p-1 ps-2 text-sm font-bold tracking-wider uppercase lg:text-sm xl:tracking-wide 2xl:text-[0.9rem]">
-        <p>{date}</p>
+    <figure className="3xl:p-1 3xl:text-sm 3xl:gap-1.5 flex flex-col gap-0.5 lg:gap-1 xl:text-xs">
+      <div
+        style={{ backgroundColor: appointmentData?.colorStart }}
+        className="3xl:pl-1 rounded bg-amber-500 lg:pl-0.5"
+      >
+        <span>&rarr; &nbsp;</span>
+        <span>{shortDate(appointmentData.startDate)}</span>
       </div>
 
-      <div>
-        <p>Hora de Entrada: {checkInTime}</p>
-        <p>Hora de Salida: {checkOutTime}</p>
+      <div
+        style={{ backgroundColor: appointmentData?.colorEnd }}
+        className="3xl:pl-1 rounded bg-indigo-500 lg:pl-0.5"
+      >
+        <span>&larr; &nbsp;</span>
+        <span>{shortDate(appointmentData.endDate)}</span>
       </div>
     </figure>
   );

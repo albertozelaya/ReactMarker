@@ -1,12 +1,14 @@
-import { useMarkContext } from "./contexts/useMarkContext";
-import Layout from "./ui/Layout";
-import { Notifications } from "./ui/notifications/Notifications";
-
-import MarkHistory from "./features/history/MarkHistory";
-import MarkerForm from "./features/marker/MarkerForm";
+import { Activity } from "react";
 import "./index.css";
+
+import { useMarkContext } from "./contexts/useMarkContext";
+import MarkHistory from "./features/history/MarkHistory";
+import { TableToday } from "./features/history/TableToday";
+import MarkerForm from "./features/marker/MarkerForm";
 import type { HistoryIntl } from "./interfaces/historyInt";
 import BackgroundLayout from "./ui/BackgroundLayout";
+import Layout from "./ui/Layout";
+import { Notifications } from "./ui/notifications/Notifications";
 import SeeMore from "./ui/SeeMore";
 import Spinner from "./ui/Spinners";
 import { configureDevExtreme } from "./utils/devextreme-config";
@@ -28,21 +30,20 @@ function App() {
     <>
       {responses.length > 0 && <Notifications responses={responses} />}
 
-      <div className="3xl:pt-[8%] relative h-screen w-screen bg-gray-100 pt-16 sm:px-[10%] sm:pt-12 md:px-[15%] lg:h-fit xl:px-16 xl:pt-18 2xl:h-screen 2xl:pt-24">
+      <div className="3xl:pt-[8%] relative h-screen w-screen bg-gray-100 pt-20 md:pt-20 sm:px-[10%] sm:pt-16 md:px-[15%] lg:h-fit xl:h-screen xl:px-16 xl:pt-18 2xl:h-screen 2xl:pt-24">
         <BackgroundLayout />
 
         <Layout>
           <MarkerForm>
+            <TableToday />
             <SeeMore />
           </MarkerForm>
         </Layout>
       </div>
 
-      {historyData?.data && (
-        <div className="bg-gray-50 px-[10%] py-16 sm:py-12 xl:py-18">
-          <MarkHistory />
-        </div>
-      )}
+      <Activity mode={historyData?.data ? "visible" : "hidden"}>
+        <MarkHistory />
+      </Activity>
     </>
   );
 }
