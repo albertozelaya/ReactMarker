@@ -12,7 +12,7 @@ interface MarkerParams {
 }
 
 function MarkerForm({ children }: MarkerParams) {
-  const { addResponse, getHistory } = useMarkContext();
+  const { addResponse, getHistory, getTodayHistory } = useMarkContext();
   const [isLoading, setIsLoading] = useState(false);
   // const [markedTime, setMarkedTime] = useState<string | null>(null);
 
@@ -38,6 +38,7 @@ function MarkerForm({ children }: MarkerParams) {
           addResponse(res?.data?.response, "success");
           // setMarkedTime(res?.data?.times ?? null);
           getHistory();
+          getTodayHistory();
         }
       })
       .finally(() => setIsLoading(false));

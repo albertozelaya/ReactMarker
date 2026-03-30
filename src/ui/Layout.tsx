@@ -10,7 +10,7 @@ export default function Layout({ children }: LayoutParams) {
       <div className="3xl:gap-10 flex flex-col gap-10 sm:gap-18 lg:gap-12 xl:gap-6 2xl:gap-10">
         <Header />
 
-        <div className="3xl:text-xl 3xl:px-52 3xl:leading-8 3xl:tracking-wider text-center leading-6 tracking-wide lg:text-lg lg:leading-7 xl:px-24 2xl:px-36">
+        <div className="3xl:text-2xl 3xl:px-52 3xl:leading-8 3xl:tracking-normal 3xl:text-gray-800 text-center leading-6 tracking-wide lg:text-lg lg:leading-7 xl:px-24 2xl:px-36">
           <p>
             Registre su entrada o salida de forma segura.
             <strong className="font-semibold text-gray-950">

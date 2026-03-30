@@ -14,7 +14,7 @@ import Spinner from "./ui/Spinners";
 import { configureDevExtreme } from "./utils/devextreme-config";
 
 function App() {
-  const { isLoading, responses, history } = useMarkContext();
+  const { isLoading, responses, history, historyToday } = useMarkContext();
   const historyData = history as HistoryIntl;
 
   configureDevExtreme();
@@ -30,12 +30,12 @@ function App() {
     <>
       {responses.length > 0 && <Notifications responses={responses} />}
 
-      <div className="3xl:pt-[8%] relative h-screen w-screen bg-gray-100 pt-20 md:pt-20 sm:px-[10%] sm:pt-16 md:px-[15%] lg:h-fit xl:h-screen xl:px-16 xl:pt-18 2xl:h-screen 2xl:pt-24">
+      <div className="3xl:pt-[8%] relative h-screen w-screen bg-gray-100 pt-20 sm:px-[10%] sm:pt-16 md:px-[15%] md:pt-20 lg:h-fit xl:h-screen xl:px-16 xl:pt-18 2xl:h-screen 2xl:pt-24">
         <BackgroundLayout />
 
         <Layout>
           <MarkerForm>
-            <TableToday />
+            <TableToday data={historyToday?.data} />
             <SeeMore />
           </MarkerForm>
         </Layout>

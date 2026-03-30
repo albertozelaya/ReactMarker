@@ -1,11 +1,14 @@
 import minLogo from "../assets/logo.png";
 import logo from "../assets/logo.webp";
+import { useMarkContext } from "../contexts/useMarkContext";
 import User from "../features/user/User";
 
 export default function Header() {
+  const { user } = useMarkContext();
+
   return (
     <header>
-      <User />
+      {user && <User />}
 
       <picture>
         <source srcSet={logo} type="image/webp" />

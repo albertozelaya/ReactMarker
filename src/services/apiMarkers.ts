@@ -1,9 +1,19 @@
 //* GET
-export async function getRequests(endpoint: string) {
-  const res = await fetch(endpoint, {
+export async function getRequests(
+  endpoint: string,
+  params?: Record<string, string>,
+) {
+  const paramsQuery = new URLSearchParams(params);
+  const urlWithParams = params
+    ? `${endpoint}?${paramsQuery.toString()}`
+    : endpoint;
+
+  const res = await fetch(urlWithParams, {
     credentials: "include",
   });
+
   if (!res.ok) throw Error("Failed to fetch");
+  if (res.status === 204) return null;
 
   const data = await res.json();
   return data;

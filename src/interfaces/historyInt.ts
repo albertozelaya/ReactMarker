@@ -4,6 +4,12 @@ export interface HistoryIntl {
   data: Datum[];
   metadata: object;
 }
+export interface HistoryTodayIntl {
+  errors: string[];
+  validationErrors: object;
+  data: Datum;
+  metadata: object;
+}
 
 export interface Datum {
   id: number;

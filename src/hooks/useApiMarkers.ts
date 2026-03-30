@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 
-import type { HistoryIntl } from "../interfaces/historyInt";
+import type { HistoryIntl, HistoryTodayIntl } from "../interfaces/historyInt";
 import { getRequests } from "../services/apiMarkers";
 import { useApiError } from "./useApiResponse";
 
 export function useApiMarkers() {
   const [history, setHistory] = useState<HistoryIntl>();
+  const [historyToday, setHistoryToday] = useState<HistoryTodayIntl>();
+  const [user, setUser] = useState<HistoryTodayIntl>();
   // const [markers, setMarkers] = useState<MarkersIntl>();
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   // const [isLoadingMarkers, setIsLoadingMarkers] = useState(true);
@@ -14,12 +16,29 @@ export function useApiMarkers() {
   // const isLoading = isLoadingHistory || isLoadingMarkers;
   const isLoading = isLoadingHistory;
 
-  const getHistory = function () {
-    getRequests(`${import.meta.env.VITE_BASE_API_URL}/marcador`)
-      .then(setHistory)
+  const getSearchHistory = function <T extends HistoryIntl | HistoryTodayIntl>(
+    setState?: React.Dispatch<React.SetStateAction<T | undefined>>,
+    params?: Record<string, string>,
+  ) {
+    setIsLoadingHistory(true);
+
+    getRequests(`${import.meta.env.VITE_BASE_API_URL}/marcador`, params)
+      .then((data) => {
+        if (setState) setState(data as T);
+      })
       .catch(() => addResponse("No se pudo cargar el historial.", "error"))
       .finally(() => setIsLoadingHistory(false));
   };
+
+  const getHistory = () => getSearchHistory(setHistory);
+  const getTodayHistory = () =>
+    getSearchHistory(setHistoryToday, {
+      typeConsult: "T",
+    });
+  const getUser = () =>
+    getSearchHistory(setUser, {
+      typeConsult: "S",
+    });
 
   // const getMarkers = function () {
   //   getRequests(`${import.meta.env.VITE_BASE_API_URL}/marcador/types`)
@@ -32,6 +51,9 @@ export function useApiMarkers() {
 
   useEffect(() => {
     getHistory();
+    getTodayHistory();
+    getUser();
+
     // getMarkers();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,11 +61,14 @@ export function useApiMarkers() {
 
   return {
     history,
+    user,
+    historyToday,
     // markers,
     responses,
     addResponse,
     clearResponse,
     getHistory,
+    getTodayHistory,
     // getMarkers,
     isLoading,
   };
