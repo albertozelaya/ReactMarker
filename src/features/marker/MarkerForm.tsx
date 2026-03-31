@@ -47,7 +47,7 @@ function MarkerForm({ children }: MarkerParams) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="3xl:py-8 z-20 flex flex-col items-center justify-center gap-4 px-12 py-10 lg:px-8 xl:w-120 xl:gap-5 xl:self-center xl:py-4 xl:pb-14 2xl:gap-6 2xl:py-20"
+      className="3xl:py-8 z-20 flex flex-col items-center justify-center gap-4 px-12 py-10 lg:px-8 xl:w-120 xl:gap-5 xl:self-center xl:py-4 2xl:gap-6 2xl:py-20"
     >
       {/* <div>
         <div className="flex xl:items-center">

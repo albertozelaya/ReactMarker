@@ -17,14 +17,13 @@ const getDate = function (date: string) {
 
 export function TableToday({ data }: TableTodayParams) {
   return (
-    /* He añadido border-collapse para que los bordes internos se rendericen bien */
-    <table className="border-collapse overflow-hidden rounded-sm tracking-wide shadow-sm xl:w-[18rem]">
+    <table className="border-collapse overflow-hidden rounded-sm tracking-wide shadow-sm">
       <thead>
         <tr>
-          <th className="3xl:text-lg bg-gray-300 p-2 text-start text-sm font-semibold text-gray-700 xl:text-base">
+          <th className="3xl:text-lg 3xl:p-3 bg-gray-300 p-2 text-start text-sm font-normal text-gray-700 xl:text-base">
             Entrada
           </th>
-          <th className="3xl:text-lg border-l border-l-gray-200 bg-gray-300 p-2 text-start text-sm font-semibold text-gray-700 xl:text-base">
+          <th className="3xl:text-lg 3xl:p-3 border-l border-l-gray-200 bg-gray-300 p-2 text-start text-sm font-normal text-gray-700 xl:text-base">
             Salida
           </th>
         </tr>
@@ -32,10 +31,14 @@ export function TableToday({ data }: TableTodayParams) {
 
       <tbody>
         <tr className="bg-container">
-          <td className="3xl:text-lg p-2 text-start text-sm text-gray-600 xl:text-base">
+          <td
+            className={`3xl:text-lg 3xl:p-3 p-2 text-start text-sm font-semibold italic xl:text-base ${data?.startDate ? "" : "text-main"}`}
+          >
             {data?.startDate ? getDate(data?.startDate) : "Pendiente"}
           </td>
-          <td className="3xl:text-lg text-main border-l border-l-gray-200 p-2 text-start text-sm font-semibold xl:text-base">
+          <td
+            className={`3xl:text-lg 3xl:p-3 border-l border-l-gray-200 p-2 text-start text-sm font-semibold italic xl:text-base ${data?.endDate ? "" : "text-main"} `}
+          >
             {data?.endDate ? getDate(data?.endDate) : "Pendiente"}
           </td>
         </tr>

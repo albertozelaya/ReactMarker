@@ -2,7 +2,12 @@ import { useMarkContext } from "../../contexts/useMarkContext";
 
 export default function User() {
   const { user } = useMarkContext();
-  const name = user?.data?.text?.split(" ")[0];
+  const name = user?.data?.text
+    ?.split(" ")[0]
+    .split("")
+    .map((letter, index) =>
+      index === 0 ? letter.toUpperCase() : letter.toLowerCase(),
+    );
 
   return (
     <aside className="fixed top-3 left-3 text-sm text-gray-600 xl:text-base 2xl:text-lg">

@@ -1,10 +1,14 @@
 import { createContext, useContext } from "react";
 import type { Response } from "../hooks/useApiResponse";
-import type { HistoryIntl, HistoryTodayIntl } from "../interfaces/historyInt";
+import type {
+  HistoryIntl,
+  HistoryTodayIntl,
+  UserIntl,
+} from "../interfaces/historyInt";
 
 interface MarkContextParams {
   history?: HistoryIntl;
-  user?: HistoryTodayIntl;
+  user?: UserIntl;
   historyToday?: HistoryTodayIntl;
   // markers?: MarkersIntl;
   isLoading: boolean;
@@ -29,4 +33,3 @@ function useMarkContext() {
 }
 
 export { useMarkContext };
-

@@ -21,3 +21,20 @@ export interface Datum {
   colorStart: string;
   colorEnd: string;
 }
+
+export interface UserIntl {
+  errors: string[];
+  validationErrors: object;
+  data: Data;
+  metadata: object;
+}
+
+interface Data {
+  id: number;
+  code: string;
+  text: string;
+  startDate: null;
+  endDate: null;
+  colorStart: null;
+  colorEnd: null;
+}
