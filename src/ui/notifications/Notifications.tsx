@@ -11,7 +11,7 @@ export function Notifications({ responses }: NotContainerParams) {
   const { clearResponse } = useMarkContext();
 
   return (
-    <div className="fixed top-4 right-6 z-20 flex flex-col gap-2">
+    <div className="fixed top-4 right-6 z-30 flex flex-col gap-2">
       {responses.map((response) => (
         <AddNotification
           key={response.message}
