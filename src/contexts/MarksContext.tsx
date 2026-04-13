@@ -10,14 +10,13 @@ function MarkContext({ children }: MarkContextParams) {
     user,
     history,
     historyToday,
-    // markers,
     responses,
+    colorIndData,
     clearResponse,
     isLoading,
     addResponse,
     getHistory,
     getTodayHistory,
-    // getMarkers,
   } = useApiMarkers();
 
   return (
@@ -26,10 +25,9 @@ function MarkContext({ children }: MarkContextParams) {
         getHistory,
         getTodayHistory,
         historyToday,
-        // getMarkers,
+        colorIndData,
         history,
         user,
-        // markers,
         responses,
         clearResponse,
         isLoading,

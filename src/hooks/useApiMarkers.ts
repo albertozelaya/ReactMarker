@@ -8,13 +8,15 @@ export function useApiMarkers() {
   const [history, setHistory] = useState<HistoryIntl>();
   const [historyToday, setHistoryToday] = useState<HistoryTodayIntl>();
   const [user, setUser] = useState<HistoryTodayIntl>();
-  // const [markers, setMarkers] = useState<MarkersIntl>();
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
+  const [isLoadingColors, setIsLoadingColors] = useState(true);
+  // const [markers, setMarkers] = useState<MarkersIntl>();
   // const [isLoadingMarkers, setIsLoadingMarkers] = useState(true);
+  const [colorIndData, setColorIndData] = useState();
   const { responses, addResponse, clearResponse } = useApiError();
 
   // const isLoading = isLoadingHistory || isLoadingMarkers;
-  const isLoading = isLoadingHistory;
+  const isLoading = isLoadingHistory || isLoadingColors;
 
   const getSearchHistory = function <T extends HistoryIntl | HistoryTodayIntl>(
     setState?: React.Dispatch<React.SetStateAction<T | undefined>>,
@@ -28,6 +30,17 @@ export function useApiMarkers() {
       })
       .catch(() => addResponse("No se pudo cargar el historial.", "error"))
       .finally(() => setIsLoadingHistory(false));
+  };
+
+  const getColorsIndicator = () => {
+    setIsLoadingColors(true);
+
+    getRequests(`${import.meta.env.VITE_BASE_API_URL}/marcador/Colors`)
+      .then((data) => {
+        setColorIndData(data);
+      })
+      .catch(() => addResponse("No se pudo cargar el indicador", "error"))
+      .finally(() => setIsLoadingColors(false));
   };
 
   const getHistory = () => getSearchHistory(setHistory);
@@ -53,6 +66,7 @@ export function useApiMarkers() {
     getHistory();
     getTodayHistory();
     getUser();
+    getColorsIndicator();
 
     // getMarkers();
 
@@ -63,13 +77,12 @@ export function useApiMarkers() {
     history,
     user,
     historyToday,
-    // markers,
+    colorIndData,
     responses,
     addResponse,
     clearResponse,
     getHistory,
     getTodayHistory,
-    // getMarkers,
     isLoading,
   };
 }

@@ -11,6 +11,19 @@ export interface HistoryTodayIntl {
   metadata: object;
 }
 
+export interface ColorIndicatorIntl {
+  errors: string[];
+  validationErrors: object;
+  data: ColorIntData[];
+  metadata: object;
+}
+
+export interface ColorIntData {
+  id: number;
+  label: string;
+  color: string;
+}
+
 export interface Datum {
   id: number;
   code: string;

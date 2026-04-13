@@ -32,12 +32,12 @@ export function TableToday({ data }: TableTodayParams) {
       <tbody>
         <tr className="bg-container">
           <td
-            className={`3xl:text-lg 3xl:p-2 p-2 text-start text-sm font-semibold italic lg:text-base ${data?.startDate ? "" : "text-main"}`}
+            className={`3xl:text-lg 3xl:p-2 p-2 text-start text-sm font-semibold italic lg:text-base ${data?.startDate ? "text-gray-800" : "text-main"}`}
           >
             {data?.startDate ? getDate(data?.startDate) : "Pendiente"}
           </td>
           <td
-            className={`3xl:text-lg 3xl:p-2 border-l border-l-gray-200 p-2 text-start text-sm font-semibold italic lg:text-base ${data?.endDate ? "" : "text-main"} `}
+            className={`3xl:text-lg 3xl:p-2 border-l border-l-gray-200 p-2 text-start text-sm font-semibold italic lg:text-base ${data?.endDate ? "text-gray-800" : "text-main"} `}
           >
             {data?.endDate ? getDate(data?.endDate) : "Pendiente"}
           </td>

@@ -6,8 +6,7 @@
 :root {
   /* PRIMARY */
   --main-color: #9d2235;
-  /* TINTS */
-  --container-background: #f1f5f9;
+  --main-gradient: #ba3e52 /* TINTS */ --container-background: #f1f5f9;
   /* SHADES */
   --color-dark-background: #656e7b;
   /* ACCENTS */
@@ -16,10 +15,11 @@
 @theme {
   /* --breakpoint-*: initial; */
   --color-main: var(--main-color);
+  --color-main-gradient: var(--main-gradient);
   --color-container: var(--container-background);
   --color-table-header: var(--color-dark-background);
   --color-button-hover: #73192a;
-  --color-accent: #00c9f1; /* 00c950 */
+  --color-accent: #23549e; /* 00c950 */
   --color-accent-text: #00505f;
   --breakpoint-sm: 35em;
   --breakpoint-md: 41em;

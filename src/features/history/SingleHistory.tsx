@@ -9,10 +9,10 @@ export default function SingleHistory(
   const { appointmentData } = model.data;
 
   return (
-    <figure className="3xl:p-1 3xl:text-sm 3xl:gap-1.5 flex flex-col gap-0.5 lg:gap-1 xl:text-xs">
+    <figure className="3xl:p-1 3xl:gap-1.5 flex flex-col gap-0.5 lg:gap-1 xl:gap-0.5 xl:text-sm 2xl:text-base">
       <div
         style={{ backgroundColor: appointmentData?.colorStart }}
-        className="3xl:pl-1 rounded bg-amber-500 lg:pl-0.5"
+        className="3xl:px-2 rounded bg-amber-500 px-1 lg:pl-0.5"
       >
         <span>&rarr; &nbsp;</span>
         <span>{shortDate(appointmentData.startDate)}</span>
@@ -20,7 +20,7 @@ export default function SingleHistory(
 
       <div
         style={{ backgroundColor: appointmentData?.colorEnd }}
-        className="3xl:pl-1 rounded bg-indigo-500 lg:pl-0.5"
+        className="3xl:px-2 rounded bg-indigo-500 px-1 lg:pl-0.5"
       >
         <span>&larr; &nbsp;</span>
         <span>{shortDate(appointmentData.endDate)}</span>
