@@ -3,16 +3,25 @@ export async function getRequests(
   endpoint: string,
   params?: Record<string, string>,
 ) {
-  const paramsQuery = new URLSearchParams(params);
-  const urlWithParams = params
-    ? `${endpoint}?${paramsQuery.toString()}`
-    : endpoint;
+  const url = new URL(endpoint);
+  if (params) {
+    Object.keys(params).forEach((key) =>
+      url.searchParams.append(key, params[key]),
+    );
+  }
 
-  const res = await fetch(urlWithParams, {
+  const res = await fetch(url.toString(), {
+    method: "GET",
     credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 
-  if (!res.ok) throw Error("Failed to fetch");
+  if (!res.ok) {
+    throw Error(`Failed to fetch: ${res.status} ${res.statusText}`);
+  }
+
   if (res.status === 204) return null;
 
   const data = await res.json();

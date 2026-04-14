@@ -21,7 +21,7 @@ export default function Header() {
         />
       </picture>
 
-      <h1 className="3xl:text-6xl 3xl:tracking-tight text-center text-5xl font-semibold tracking-tight text-gray-800 sm:text-[2.75rem] md:tracking-wide lg:text-5xl lg:tracking-tight xl:tracking-normal">
+      <h1 className="3xl:text-6xl 3xl:tracking-tight text-center text-5xl font-bold tracking-tight text-gray-800 sm:text-[2.75rem] md:tracking-wide lg:text-5xl lg:tracking-tight xl:tracking-normal">
         Registro de Asistencia
       </h1>
     </header>
