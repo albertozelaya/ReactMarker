@@ -1,7 +1,7 @@
-import minLogo from "../assets/logo.png";
-import logo from "../assets/logo.webp";
 import { useMarkContext } from "../contexts/useMarkContext";
 import User from "../features/user/User";
+import minLogo from "/logo.png";
+import logo from "/logo.webp";
 
 export default function Header() {
   const { user } = useMarkContext();
