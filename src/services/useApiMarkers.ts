@@ -22,13 +22,15 @@ export function useApiMarkers() {
   const isLoading = isLoadingHistory || isLoadingColors;
 
   //* GET HISTORY
-  const getSearchHistory = function <T extends HistoryIntl | HistoryTodayIntl>(
+  const getSearchHistory = async function <
+    T extends HistoryIntl | HistoryTodayIntl,
+  >(
     setState?: React.Dispatch<React.SetStateAction<T | undefined>>,
     params?: Record<string, string>,
   ) {
     setIsLoadingHistory(true);
 
-    getRequests(
+    await getRequests(
       `${import.meta.env.VITE_BASE_API_URL}/marcador/codeEmployee`,
       params,
     )
