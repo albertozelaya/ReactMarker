@@ -19,11 +19,10 @@ const views: SchedulerTypes.ViewType[] = ["day", "week", "workWeek", "month"];
 
 function MarkHistory() {
   const { history } = useMarkContext();
-  // 2. Estado para controlar el ancho de forma reactiva
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1072);
   const historyData = history as HistoryIntl;
 
-  const appointments = transformHistory(historyData?.data ?? []);
+  const appointments = transformHistory(historyData?.data);
 
   useEffect(function () {
     const handleResize = () => {
@@ -49,7 +48,7 @@ function MarkHistory() {
           dataSource={appointments}
           customComponent={AppointmentCustom}
           defaultCurrentView="month"
-          defaultCurrentDate={appointments.at(-1)?.startDate}
+          defaultCurrentDate={appointments?.at(0)?.startDate}
           views={views}
           editing={editing}
           adaptivityEnabled={!isLargeScreen}

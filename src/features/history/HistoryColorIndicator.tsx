@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useMarkContext } from "../../contexts/useMarkContext";
 import type { ColorIntData } from "../../interfaces/historyInt";
@@ -9,8 +9,15 @@ interface HistoryColorIndicatorParams {
 }
 
 export default function HistoryColorIndicator() {
-  const { colorIndData } = useMarkContext();
+  const { colorIndData, getColorsIndicator } = useMarkContext();
   const [openIndicator, setOpenIndicator] = useState(false);
+
+  useEffect(
+    function () {
+      getColorsIndicator();
+    },
+    [getColorsIndicator],
+  );
 
   const handleIndicator = function () {
     setOpenIndicator((open) => !open);
@@ -43,7 +50,7 @@ export function ColorIndicator({
 }: HistoryColorIndicatorParams) {
   return (
     <aside
-      className={`absolute top-18 right-5 z-30 rounded-sm bg-gray-50/40 p-3 text-sm tracking-wider text-gray-800 shadow-sm transition-opacity duration-200 lg:right-8 lg:p-4 xl:top-20 xl:shadow-md 2xl:p-5 2xl:tracking-wide ${className} 3xl:border-gray-200 3xl:shadow-lg 3xl:text-lg border border-gray-100 backdrop-blur-sm lg:text-base lg:backdrop-blur-md xl:rounded-lg`}
+      className={`absolute top-18 right-5 z-30 rounded-sm p-3 text-sm tracking-wider text-gray-800 shadow-sm transition-opacity duration-200 lg:right-8 lg:p-4 xl:top-20 xl:shadow-md 2xl:p-5 2xl:tracking-wide ${className} 3xl:border-gray-200 3xl:shadow-lg 3xl:text-lg 3xl:backdrop-blur-md border border-gray-100 bg-gray-50/50 backdrop-blur-sm lg:text-base xl:rounded-lg`}
     >
       <ul className="flex flex-col gap-1 xl:gap-2">
         {data?.map((info) => {

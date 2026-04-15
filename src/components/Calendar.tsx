@@ -13,13 +13,14 @@ export interface AppointmentComponentProps<T> {
     appointmentData: T;
     targetedAppointmentData?: T;
   };
+  index: number;
 }
 
 interface CalendarParams<T extends AppointmentBase> {
   children?: ReactNode;
   dataSource?: T[];
   defaultCurrentView?: string;
-  defaultCurrentDate?: Date;
+  defaultCurrentDate?: Date | string;
   height?: string | number;
   width?: string | number;
   startDayHour?: number;
@@ -71,11 +72,6 @@ function Calendar<T extends AppointmentBase>({
       firstDayOfWeek={firstDayOfWeek}
       showAllDayPanel={showAllDayPanel}
       onAppointmentRendered={(e) => {
-        // const color = (e.appointmentData as T).color;
-        // if (color && e.appointmentElement) {
-        //   e.appointmentElement.style.backgroundColor = color;
-        //   e.appointmentElement.style.borderColor = color;
-        // }
         e.appointmentElement.style.backgroundColor = "transparent";
         e.appointmentElement.style.borderColor = "transparent";
         e.appointmentElement.style.boxShadow = "none";

@@ -5,19 +5,24 @@ export type HistoryItem = {
   code: string;
   fullName: string;
   date: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   colorStart: string;
   colorEnd: string;
 };
 
-/**
- * Transforma la data del backend al formato que espera el Scheduler de DevExtreme
- */
-export function transformHistory(data: Datum[]): HistoryItem[] {
-  return data.map((item) => ({
-    ...item,
-    startDate: new Date(item.startDate),
-    endDate: new Date(item.endDate),
+export function transformHistory(data?: Datum[]) {
+  if (!data) return;
+
+  return data.map((app) => ({
+    ...app,
+    startDate:
+      typeof app.startDate === "string"
+        ? app.startDate.replace(" ", "T")
+        : app.startDate,
+    endDate:
+      typeof app.endDate === "string"
+        ? app.endDate.replace(" ", "T")
+        : app.endDate,
   }));
 }

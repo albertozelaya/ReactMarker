@@ -1,10 +1,6 @@
 export default function Logo() {
   return (
-    <svg
-      viewBox="0 0 520 520"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_d_2029_7)">
         <path
           d="M294.997 303.133C282.658 301.492 270.707 303.508 270.707 303.508C256.898 305.407 243.49 310.421 230.99 317.658L5.09742 247.412C5.09742 247.412 -4.32704 276.319 32.0608 314.75C65.6413 350.183 136.973 371.945 188.828 354.021C170.099 376.713 157.426 403.695 154.753 427.924C148.951 479.73 174.35 497.628 174.35 497.628L314.313 310.124C314.313 310.124 307.335 304.645 294.997 303.133Z"
@@ -35,9 +31,9 @@ export default function Logo() {
           width="520"
           height="520"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"

@@ -45,7 +45,7 @@ function MarkerForm({ children }: MarkerParams) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="3xl:py-8 z-20 flex flex-col items-center justify-center gap-4 px-12 pt-10 lg:px-8 xl:w-120 xl:self-center xl:pt-0 xl:pb-0 2xl:gap-6 2xl:py-20"
+      className="3xl:py-8 z-20 flex flex-col items-center justify-center gap-4 px-12 pt-10 lg:px-8 lg:py-0 xl:w-120 xl:self-center xl:pt-0 xl:pb-0 2xl:gap-6 2xl:py-20"
     >
       {/* <div>
         <div className="flex xl:items-center">
@@ -65,7 +65,11 @@ function MarkerForm({ children }: MarkerParams) {
         {errorMessage && <ErrorForm error={errorMessage} />}
       </div> */}
 
-      <Button>{isLoading ? <SpinnerButton /> : "Marcar"}</Button>
+      <Button
+        className={`uppercase ${isLoading ? "3xl:w-[7.98rem] w-[6.37rem] md:w-[6.17rem] xl:w-[6.93rem] 2xl:w-[6.93rem]" : ""}`}
+      >
+        {isLoading ? <SpinnerButton /> : "Marcar"}
+      </Button>
 
       {/* {markedTime && (
         <p className="text-sm text-gray-700 md:text-base 2xl:text-lg">
