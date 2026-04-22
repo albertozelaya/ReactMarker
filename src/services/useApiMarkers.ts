@@ -1,106 +1,134 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useReducer } from "react";
 
+import type { MarkersState } from "../features/marker/markerSlice";
+import { initialState, markersReducer } from "../features/marker/markerSlice";
 import { useApiError } from "../hooks/useApiResponse";
-import type { HistoryIntl, HistoryTodayIntl } from "../interfaces/historyInt";
+import type {
+  GetHistoryParams,
+  HistoryIntl,
+  HistoryTodayIntl,
+} from "../interfaces/historyInt";
 import { getRequests, insertMark } from "./apiMarkers";
 
 export function useApiMarkers() {
-  const [code, setCode] = useState("");
-  const [history, setHistory] = useState<HistoryIntl>();
-  const [historyToday, setHistoryToday] = useState<HistoryTodayIntl>();
-  const [user, setUser] = useState<HistoryTodayIntl>();
-  const [isLoadingHistory, setIsLoadingHistory] = useState(false);
-  const [isLoadingForm, setIsLoadingForm] = useState(false);
-  const [isLoadingColors, setIsLoadingColors] = useState(false);
-  // const [markers, setMarkers] = useState<MarkersIntl>();
-  // const [isLoadingMarkers, setIsLoadingMarkers] = useState(true);
-  const [colorIndData, setColorIndData] = useState();
+  const [state, dispatch] = useReducer(markersReducer, initialState);
   const { responses, addResponse, clearResponse } = useApiError();
 
-  // const isLoading = isLoadingHistory || isLoadingMarkers;
-  // const isLoading = isLoadingHistory || isLoadingColors;
-  const isLoading = isLoadingHistory || isLoadingColors;
+  const setLoading = (key: keyof MarkersState["loading"], value: boolean) =>
+    dispatch({ type: "SET_LOADING", key, value });
 
-  //* GET HISTORY
-  const getSearchHistory = async function <
-    T extends HistoryIntl | HistoryTodayIntl,
-  >(
-    setState?: React.Dispatch<React.SetStateAction<T | undefined>>,
-    params?: Record<string, string>,
-  ) {
-    setIsLoadingHistory(true);
+  const isLoading =
+    state.loading.history ||
+    state.loading.historyToday ||
+    state.loading.user ||
+    state.loading.colors;
 
-    await getRequests(
-      `${import.meta.env.VITE_BASE_API_URL}/marcador/codeEmployee`,
+  // ── Generic fetch helper ─────────────────────────────────────────────────
+
+  const fetchHistory = useCallback(
+    async <T>({
+      onSuccess,
+      loadingKey,
       params,
-    )
-      .then((data) => {
-        addResponse("Historial cargado correctamente", "success");
+      successMsg,
+      errorMsg,
+    }: GetHistoryParams<T>) => {
+      setLoading(loadingKey, true);
 
-        if (setState) setState(data as T);
-      })
-      .catch(() => addResponse("No se pudo cargar el historial.", "error"))
-      .finally(() => setIsLoadingHistory(false));
-  };
-  const getHistory = () => getSearchHistory(setHistory, { code });
+      await getRequests(`${import.meta.env.VITE_BASE_API_URL}/marcador`, params)
+        .then((data) => {
+          if (successMsg) addResponse(successMsg, "success");
+          onSuccess(data as T);
+        })
+        .catch(() => addResponse(errorMsg, "error"))
+        .finally(() => setLoading(loadingKey, false));
+    },
+    [addResponse],
+  );
 
-  //* GET COLORS INDICATOR
+  // ── Actions ──────────────────────────────────────────────────────────────
+
+  const getHistory = useCallback(
+    () =>
+      fetchHistory<HistoryIntl>({
+        loadingKey: "history",
+        onSuccess: (data) => dispatch({ type: "SET_HISTORY", payload: data }),
+        successMsg: "Historial cargado correctamente",
+        errorMsg: "Error al cargar el historial",
+      }),
+    [fetchHistory],
+  );
+
+  const getTodayHistory = useCallback(
+    () =>
+      fetchHistory<HistoryTodayIntl>({
+        loadingKey: "historyToday",
+        params: { typeConsult: "T" },
+        onSuccess: (data) =>
+          dispatch({ type: "SET_HISTORY_TODAY", payload: data }),
+        errorMsg: "Error al cargar el marcado de hoy",
+      }),
+    [fetchHistory],
+  );
+
+  const getUser = useCallback(
+    () =>
+      fetchHistory<HistoryTodayIntl>({
+        loadingKey: "user",
+        params: { typeConsult: "S" },
+        onSuccess: (data) => dispatch({ type: "SET_USER", payload: data }),
+        errorMsg: "Error al cargar el usuario",
+      }),
+    [fetchHistory],
+  );
+
   const getColorsIndicator = useCallback(() => {
-    setIsLoadingColors(true);
+    setLoading("colors", true);
 
     getRequests(`${import.meta.env.VITE_BASE_API_URL}/marcador/colors`)
-      .then((data) => {
-        setColorIndData(data);
-      })
+      .then((data) => dispatch({ type: "SET_COLOR_IND_DATA", payload: data }))
       .catch(() => addResponse("No se pudo cargar el indicador", "error"))
-      .finally(() => setIsLoadingColors(false));
+      .finally(() => setLoading("colors", false));
   }, [addResponse]);
 
-  const getTodayHistory = () =>
-    getSearchHistory(setHistoryToday, {
-      typeConsult: "T",
-      code,
-    });
+  const insertMarker = useCallback(async () => {
+    setLoading("form", true);
 
-  const getUser = () =>
-    getSearchHistory(setUser, {
-      typeConsult: "S",
-      code,
-    });
-
-  //* POST MARKER
-  const insertMarker = async () => {
-    await insertMark({ code })
+    await insertMark()
       .then((res) => {
         if (res?.errors?.length > 0) {
-          addResponse(res?.errors?.join(", "), "error");
+          addResponse(res.errors.join(", "), "error");
         } else {
           addResponse(res?.data?.response, "success");
           getHistory();
           getTodayHistory();
         }
       })
-      .finally(() => setIsLoadingForm(false));
-  };
+      .catch(() => addResponse("Error al insertar el marcador", "error"))
+      .finally(() => setLoading("form", false));
+  }, [addResponse, getHistory, getTodayHistory]);
+
+  useEffect(() => {
+    getHistory();
+    getTodayHistory();
+    getUser();
+    getColorsIndicator();
+  }, [getColorsIndicator, getHistory, getTodayHistory, getUser]);
 
   return {
-    history,
-    user,
-    code,
-    setCode,
-    historyToday,
-    colorIndData,
+    history: state.history,
+    historyToday: state.historyToday,
+    user: state.user,
+    colorIndData: state.colorIndData,
+    loading: state.loading,
+    setLoading,
+    isLoading,
     responses,
-    isLoadingForm,
-    setIsLoadingForm,
-    setIsLoadingHistory,
-    getColorsIndicator,
-    insertMarker,
     addResponse,
     clearResponse,
     getHistory,
-    getUser,
     getTodayHistory,
-    isLoading,
+    getUser,
+    insertMarker,
   };
 }

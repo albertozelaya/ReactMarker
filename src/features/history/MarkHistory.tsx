@@ -15,7 +15,7 @@ const editing = {
   allowDragging: false,
 };
 
-const views: SchedulerTypes.ViewType[] = ["day", "week", "workWeek", "month"];
+const views: SchedulerTypes.ViewType[] = ["month"];
 
 function MarkHistory() {
   const { history } = useMarkContext();
@@ -23,6 +23,7 @@ function MarkHistory() {
   const historyData = history as HistoryIntl;
 
   const appointments = transformHistory(historyData?.data);
+  const startDateToday = appointments?.at(0)?.startDate;
 
   useEffect(function () {
     const handleResize = () => {
@@ -48,10 +49,12 @@ function MarkHistory() {
           dataSource={appointments}
           customComponent={AppointmentCustom}
           defaultCurrentView="month"
-          defaultCurrentDate={appointments?.at(0)?.startDate}
           views={views}
           editing={editing}
           adaptivityEnabled={!isLargeScreen}
+          {...(startDateToday && {
+            defaultCurrentDate: startDateToday,
+          })}
         />
       </article>
     </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useMarkContext } from "../../contexts/useMarkContext";
 import type { ColorIntData } from "../../interfaces/historyInt";
@@ -9,15 +9,8 @@ interface HistoryColorIndicatorParams {
 }
 
 export default function HistoryColorIndicator() {
-  const { colorIndData, getColorsIndicator } = useMarkContext();
+  const { colorIndData } = useMarkContext();
   const [openIndicator, setOpenIndicator] = useState(false);
-
-  useEffect(
-    function () {
-      getColorsIndicator();
-    },
-    [getColorsIndicator],
-  );
 
   const handleIndicator = function () {
     setOpenIndicator((open) => !open);

@@ -30,18 +30,8 @@ export async function getRequests(
 
 //* POST
 // export async function insertMark(payload: { type: string }) {
-export async function insertMark(params: Record<string, string>) {
-  const url = new URL(
-    `${import.meta.env.VITE_BASE_API_URL}/marcador/codeEmployee`,
-  );
-
-  if (params) {
-    Object.keys(params).forEach((key) =>
-      url.searchParams.append(key, params[key]),
-    );
-  }
-
-  const res = await fetch(String(url), {
+export async function insertMark() {
+  const res = await fetch(`${import.meta.env.VITE_BASE_API_URL}/marcador`, {
     credentials: "include",
     method: "POST",
     headers: { "Content-Type": "application/json" },

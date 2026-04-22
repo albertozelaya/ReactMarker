@@ -15,7 +15,11 @@ export default function SingleHistory(
         className="3xl:px-2 rounded bg-amber-500 px-1 lg:pl-0.5"
       >
         <span>&rarr; &nbsp;</span>
-        <span>{shortDate(appointmentData.startDate)}</span>
+        <span>
+          {appointmentData?.startDate?.includes("T")
+            ? shortDate(appointmentData?.startDate)
+            : "Pendiente"}
+        </span>
       </div>
 
       <div
@@ -23,7 +27,11 @@ export default function SingleHistory(
         className="3xl:px-2 rounded bg-indigo-500 px-1 lg:pl-0.5"
       >
         <span>&larr; &nbsp;</span>
-        <span>{shortDate(appointmentData.endDate)}</span>
+        <span>
+          {appointmentData?.endDate?.includes("T")
+            ? shortDate(appointmentData?.endDate)
+            : "Pendiente"}
+        </span>
       </div>
     </figure>
   );

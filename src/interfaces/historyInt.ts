@@ -1,3 +1,5 @@
+import type { MarkersState } from "../features/marker/markerSlice";
+
 export interface HistoryIntl {
   errors: string[];
   validationErrors: object;
@@ -51,4 +53,12 @@ interface Data {
   endDate: null;
   colorStart: null;
   colorEnd: null;
+}
+
+export interface GetHistoryParams<T> {
+  onSuccess: (data: T) => void;
+  loadingKey: keyof MarkersState["loading"];
+  params?: Record<string, string>;
+  successMsg?: string;
+  errorMsg: string;
 }

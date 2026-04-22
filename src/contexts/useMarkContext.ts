@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import type { Response } from "../hooks/useApiResponse";
+import type { MarkersState } from "../features/marker/markerSlice";
 import type {
   ColorIndicatorIntl,
   HistoryIntl,
@@ -7,24 +8,23 @@ import type {
 } from "../interfaces/historyInt";
 
 interface MarkContextParams {
+  // State
   history?: HistoryIntl;
-  user?: HistoryTodayIntl;
   historyToday?: HistoryTodayIntl;
+  user?: HistoryTodayIntl;
   colorIndData?: ColorIndicatorIntl;
+  loading: MarkersState["loading"]; // { history, historyToday, user, colors, form }
   isLoading: boolean;
-  insertMarker: () => Promise<void>;
+  // Responses
   responses: Response[];
-  code: string;
-  setCode: React.Dispatch<React.SetStateAction<string>>;
-  setIsLoadingHistory: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoadingForm: boolean;
-  setIsLoadingForm: React.Dispatch<React.SetStateAction<boolean>>;
-  getHistory: () => void;
-  getUser: () => void;
-  getTodayHistory: () => void;
-  getColorsIndicator: () => void;
-  clearResponse: (message: string) => void;
   addResponse: (message: string, type: "success" | "error") => void;
+  clearResponse: (message: string) => void;
+  // Actions
+  setLoading: (key: keyof MarkersState["loading"], value: boolean) => void;
+  getHistory: () => void;
+  getTodayHistory: () => void;
+  getUser: () => void;
+  insertMarker: () => Promise<void>;
 }
 
 export const MarksContext = createContext<MarkContextParams | undefined>(
@@ -34,7 +34,6 @@ export const MarksContext = createContext<MarkContextParams | undefined>(
 function useMarkContext() {
   const context = useContext(MarksContext);
   if (context === undefined) throw new Error("No esta en un hijo directo");
-
   return context;
 }
 
