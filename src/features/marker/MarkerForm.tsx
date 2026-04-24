@@ -65,11 +65,13 @@ function MarkerForm({ children }: MarkerParams) {
         {errorMessage && <ErrorForm error={errorMessage} />}
       </div> */}
 
-      <Button
-        className={`uppercase ${isLoading ? "3xl:w-[7.98rem] w-[6.37rem] md:w-[6.17rem] xl:w-[6.93rem] 2xl:w-[6.93rem]" : ""}`}
-      >
-        {isLoading ? <SpinnerButton /> : "Marcar"}
-      </Button>
+      <div className="flex items-center justify-center">
+        <Button
+          className={`uppercase ${isLoading ? "3xl:w-[7.98rem] w-[6.37rem] md:w-[6.17rem] xl:w-[6.93rem] 2xl:w-[6.93rem]" : ""}`}
+        >
+          {isLoading ? <SpinnerButton /> : "Marcar"}
+        </Button>
+      </div>
 
       {/* {markedTime && (
         <p className="text-sm text-gray-700 md:text-base 2xl:text-lg">

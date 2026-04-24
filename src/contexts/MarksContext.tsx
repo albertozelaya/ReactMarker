@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useApiMarkers } from "../services/useApiMarkers";
 import { MarksContext } from "./useMarkContext";
 
@@ -6,6 +7,8 @@ interface MarkContextParams {
 }
 
 function MarkContext({ children }: MarkContextParams) {
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1072);
+
   const {
     history,
     historyToday,
@@ -23,9 +26,20 @@ function MarkContext({ children }: MarkContextParams) {
     insertMarker,
   } = useApiMarkers();
 
+  useEffect(function () {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth > 800);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <MarksContext.Provider
       value={{
+        isLargeScreen,
         history,
         historyToday,
         user,

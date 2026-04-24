@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
-import type { Response } from "../hooks/useApiResponse";
 import type { MarkersState } from "../features/marker/markerSlice";
+import type { Response } from "../hooks/useApiResponse";
 import type {
   ColorIndicatorIntl,
   HistoryIntl,
@@ -9,6 +9,7 @@ import type {
 
 interface MarkContextParams {
   // State
+  isLargeScreen: boolean;
   history?: HistoryIntl;
   historyToday?: HistoryTodayIntl;
   user?: HistoryTodayIntl;

@@ -43,7 +43,7 @@ export function ColorIndicator({
 }: HistoryColorIndicatorParams) {
   return (
     <aside
-      className={`absolute top-18 right-5 z-30 rounded-sm p-3 text-sm tracking-wider text-gray-800 shadow-sm transition-opacity duration-200 lg:right-8 lg:p-4 xl:top-20 xl:shadow-md 2xl:p-5 2xl:tracking-wide ${className} 3xl:border-gray-200 3xl:shadow-lg 3xl:text-lg 3xl:backdrop-blur-md border border-gray-100 bg-gray-50/50 backdrop-blur-sm lg:text-base xl:rounded-lg`}
+      className={`absolute top-18 right-5 z-30 rounded-sm p-3 text-sm tracking-wider text-gray-800 shadow-sm transition-opacity duration-200 lg:right-8 lg:p-4 xl:top-20 xl:shadow-md 2xl:p-5 2xl:tracking-wide ${className} 3xl:border-gray-200 3xl:shadow-lg 3xl:text-lg border border-gray-100 bg-gray-50/20 backdrop-blur-sm lg:text-base xl:rounded-lg`}
     >
       <ul className="flex flex-col gap-1 xl:gap-2">
         {data?.map((info) => {

@@ -5,7 +5,6 @@ import { useMarkContext } from "./contexts/useMarkContext";
 import MarkHistory from "./features/history/MarkHistory";
 import { TableToday } from "./features/history/TableToday";
 import MarkerForm from "./features/marker/MarkerForm";
-import type { HistoryIntl } from "./interfaces/historyInt";
 import BackgroundLayout from "./ui/BackgroundLayout";
 import Layout from "./ui/Layout";
 import Loader from "./ui/Loader";
@@ -15,7 +14,6 @@ import { configureDevExtreme } from "./utils/devextreme-config";
 
 function App() {
   const { isLoading, responses, history, historyToday } = useMarkContext();
-  const historyData = history as HistoryIntl;
 
   configureDevExtreme();
 
@@ -24,7 +22,7 @@ function App() {
       {responses.length > 0 && <Notifications responses={responses} />}
       {isLoading && <Loader />}
 
-      <div className="3xl:pt-[8%] relative h-screen w-screen bg-gray-100 pt-20 sm:px-[10%] sm:pt-16 md:px-[15%] md:pt-20 xl:px-16 xl:pt-18 2xl:h-screen 2xl:pt-24">
+      <div className="3xl:pt-[8%] relative h-screen w-screen bg-gray-100 pt-20 sm:px-[10%] sm:pt-16 md:px-[15%] md:pt-20 xl:px-16 xl:pt-18 2xl:pt-24">
         <BackgroundLayout />
 
         <Layout>
@@ -35,9 +33,9 @@ function App() {
         </Layout>
       </div>
 
-      <Activity mode={historyData?.data ? "visible" : "hidden"}>
-        <MarkHistory />
-      </Activity>
+      {/* <Activity mode={history?.data ? "visible" : "hidden"}> */}
+        <MarkHistory history={history} />
+      {/* </Activity> */}
     </>
   );
 }

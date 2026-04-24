@@ -13,6 +13,19 @@ export interface HistoryTodayIntl {
   metadata: object;
 }
 
+export interface Datum {
+  id: number;
+  text: string;
+  code: string;
+  fullName: string;
+  date: string;
+  startDate: string;
+  endDate: string;
+  colorStart: string;
+  colorEnd: string;
+}
+
+//* History colors
 export interface ColorIndicatorIntl {
   errors: string[];
   validationErrors: object;
@@ -26,18 +39,7 @@ export interface ColorIntData {
   color: string;
 }
 
-export interface Datum {
-  id: number;
-  text: string;
-  code: string;
-  fullName: string;
-  date: string;
-  startDate: string;
-  endDate: string;
-  colorStart: string;
-  colorEnd: string;
-}
-
+//* User
 export interface UserIntl {
   errors: string[];
   validationErrors: object;
@@ -55,6 +57,19 @@ interface Data {
   colorEnd: null;
 }
 
+export interface HistoryTransformed {
+  startDate: string;
+  endDate: string;
+  id: number;
+  text: string;
+  code: string;
+  fullName: string;
+  date: string;
+  colorStart: string;
+  colorEnd: string;
+}
+
+//* API
 export interface GetHistoryParams<T> {
   onSuccess: (data: T) => void;
   loadingKey: keyof MarkersState["loading"];
@@ -62,3 +77,4 @@ export interface GetHistoryParams<T> {
   successMsg?: string;
   errorMsg: string;
 }
+

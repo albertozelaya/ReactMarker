@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 const variants = {
-  error: "text-rose-600 bg-white hover:text-red-800 border border-rose-600",
+  error:
+    "border border-rose-600 bg-white text-rose-600 hover:text-red-800 hover:border-red-800",
   success:
-    "text-green-600 bg-white hover:text-green-800 border border-green-600",
+    "text-green-600 bg-white hover:text-green-800 hover:border-green-800 border border-green-600",
   warning:
-    "text-yellow-600 bg-white hover:text-yellow-800 border border-yellow-600",
-  info: "text-blue-600 bg-white hover:text-blue-800 border border-blue-600",
+    "text-yellow-600 bg-white hover:text-yellow-800 hover:border-yellow-800 border border-yellow-600",
+  info: "text-blue-600 bg-white hover:text-blue-800 border hover:border-blue-800 border-blue-600",
 };
 
 interface NotificationParams {
@@ -21,13 +22,16 @@ export function AddNotification({
   variant = "error",
 }: NotificationParams) {
   const [visible, setVisible] = useState(true);
+
   const msgFormatted = useMemo(
     function () {
       return message
         ?.toLowerCase()
-        .split("")
-        ?.map((letter, index) => (index === 0 ? letter.toUpperCase() : letter))
-        .join("");
+        .split(" ")
+        ?.map((letter, index) =>
+          index === 0 ? letter[0].toUpperCase() + letter.slice(1) : letter,
+        )
+        .join(" ");
     },
     [message],
   );

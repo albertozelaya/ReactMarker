@@ -1,19 +1,9 @@
 import type { Datum } from "../../interfaces/historyInt";
+import { dateWithHours } from "../../utils/dateHelpers";
 
 interface TableTodayParams {
   data?: Datum;
 }
-
-const getDate = function (date: string) {
-  return new Intl.DateTimeFormat(navigator.language, {
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-  })
-    .format(new Date(date))
-    .toLowerCase()
-    .replace(/\s/g, "");
-};
 
 export function TableToday({ data }: TableTodayParams) {
   return (
@@ -34,12 +24,12 @@ export function TableToday({ data }: TableTodayParams) {
           <td
             className={`3xl:text-lg 3xl:p-2 p-2 text-start text-sm font-semibold italic lg:text-base ${data?.startDate ? "text-gray-800" : "text-main"}`}
           >
-            {data?.startDate ? getDate(data?.startDate) : "Pendiente"}
+            {data?.startDate ? dateWithHours(data?.startDate) : "Pendiente"}
           </td>
           <td
             className={`3xl:text-lg 3xl:p-2 border-l border-l-gray-200 p-2 text-start text-sm font-semibold italic lg:text-base ${data?.endDate ? "text-gray-800" : "text-main"} `}
           >
-            {data?.endDate ? getDate(data?.endDate) : "Pendiente"}
+            {data?.endDate ? dateWithHours(data?.endDate) : "Pendiente"}
           </td>
         </tr>
       </tbody>

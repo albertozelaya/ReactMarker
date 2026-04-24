@@ -1,5 +1,5 @@
 import type { AppointmentComponentProps } from "../../components/Calendar";
-import { shortDate } from "../../utils/dateHelpers";
+import { dateWithLargeHours } from "../../utils/dateHelpers";
 import type { HistoryItem } from "./transformHistory";
 
 // AppointmentCustom.tsx
@@ -9,15 +9,16 @@ export default function SingleHistory(
   const { appointmentData } = model.data;
 
   return (
-    <figure className="3xl:p-1 3xl:gap-1.5 flex flex-col gap-0.5 lg:gap-1 xl:gap-0.5 xl:text-sm 2xl:text-base">
+    <figure className="3xl:p-0.5 3xl:gap-1 flex flex-col gap-0.5 xl:text-sm 2xl:text-base">
       <div
         style={{ backgroundColor: appointmentData?.colorStart }}
         className="3xl:px-2 rounded bg-amber-500 px-1 lg:pl-0.5"
       >
-        <span>&rarr; &nbsp;</span>
+        <span>&rarr;</span>
+        <span>&nbsp;</span>
         <span>
           {appointmentData?.startDate?.includes("T")
-            ? shortDate(appointmentData?.startDate)
+            ? dateWithLargeHours(appointmentData?.startDate)
             : "Pendiente"}
         </span>
       </div>
@@ -26,10 +27,12 @@ export default function SingleHistory(
         style={{ backgroundColor: appointmentData?.colorEnd }}
         className="3xl:px-2 rounded bg-indigo-500 px-1 lg:pl-0.5"
       >
-        <span>&larr; &nbsp;</span>
+        <span>&larr;</span>
+        <span>&nbsp;</span>
+
         <span>
           {appointmentData?.endDate?.includes("T")
-            ? shortDate(appointmentData?.endDate)
+            ? dateWithLargeHours(appointmentData?.endDate)
             : "Pendiente"}
         </span>
       </div>

@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.5.1",
     "devextreme": "^25.2.5",
     "devextreme-react": "^25.2.5",
     "react": "^19.2.0",
