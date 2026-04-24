@@ -33,9 +33,9 @@ function App() {
         </Layout>
       </div>
 
-      {/* <Activity mode={history?.data ? "visible" : "hidden"}> */}
+      <Activity mode={history?.data ? "visible" : "hidden"}>
         <MarkHistory history={history} />
-      {/* </Activity> */}
+      </Activity>
     </>
   );
 }
