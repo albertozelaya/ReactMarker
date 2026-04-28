@@ -1,4 +1,4 @@
-import { Activity } from "react";
+import { Activity, useEffect } from "react";
 import "./index.css";
 
 import { useMarkContext } from "./contexts/useMarkContext";
@@ -14,6 +14,10 @@ import { configureDevExtreme } from "./utils/devextreme-config";
 
 function App() {
   const { isLoading, responses, history, historyToday } = useMarkContext();
+
+  useEffect(() => {
+    if (history?.data) window.scrollTo({ top: 0, behavior: "instant" });
+  }, [history?.data]);
 
   configureDevExtreme();
 
